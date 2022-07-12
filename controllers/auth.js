@@ -28,7 +28,7 @@ const checkPassError = (error)=>{
 }
 
 
-module.exports.signup_post = async(req , res) =>{
+module.exports.signup_post = async (req , res) =>{
     try {
         const user = await  User.create({username: req.body.username,
             email:req.body.email,
@@ -43,4 +43,16 @@ module.exports.signup_post = async(req , res) =>{
         let error = {passwordError:checkPassError(err.message), emailError: checkEmailError(err), usernameError:checkUsernameErr(err)};
         res.status(400).json({ error });
     }
+}
+
+
+module.exports.login_post = async (req , res) =>{
+    try {
+        const user = await User.login(req.body.email, req.body.password)          
+        res.status(200).json({ user: user.email, error: "" });
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+     
 }

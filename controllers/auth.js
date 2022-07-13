@@ -1,5 +1,11 @@
 const User = require("../models/User");
+const jwt = require('jsonwebtoken');
 
+const createToken = (id, username)=>{
+    return jwt.sign({id, username}, process.env.JWT_SECRET , {
+        expiresIn: "2 days"
+    });
+}
 //check the errors for showing to the user
 const checkEmailError = (error)=>{
     let errorMessage = ""
@@ -36,7 +42,9 @@ module.exports.signup_post = async (req , res) =>{
             name: req.body.name,
             username: req.body.username 
         });     
-        
+        const token = createToken(user._id, user.username);
+
+        res.cookie('jwt', token, { httpOnly: true, maxAge: 2* 24 *60 *60* 1000 });
         res.status(201).json({ user: req.body.email });
     } catch (err) {
         console.log(err.message)
@@ -48,7 +56,10 @@ module.exports.signup_post = async (req , res) =>{
 
 module.exports.login_post = async (req , res) =>{
     try {
-        const user = await User.login(req.body.email, req.body.password)          
+        const user = await User.login(req.body.email, req.body.password) 
+        const token = createToken(user._id, user.username);
+
+        res.cookie('jwt', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 });         
         res.status(200).json({ user: user.email, error: "" });
 
     } catch (error) {

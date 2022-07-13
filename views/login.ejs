@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/style.css" rel="stylesheet" type="text/css" />
+        <title>Login</title>
+    </head>
+    <body>
+        <%- include("./partials/nav.ejs") %>
+
+        <form id="form">
+            <h2>Log in</h2>
+            <label for="email">Email</label>
+            <input type="text" name="email" required />
+            <label for="password">Password</label>
+            <input type="password" name="password" required />
+            <div class="input error"></div>
+            <button>Log in</button>
+          </form>  
+          <script src="/js/login.js"></script>        
+    </body>
+    
+</html>

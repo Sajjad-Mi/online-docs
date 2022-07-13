@@ -1,0 +1,89 @@
+body{
+    padding:30px;
+    width: 65%;
+    margin: auto;
+    background-color: #f8f9fa;
+    font-family: 'Hind Siliguri', sans-serif;
+}
+/* nav style */
+nav{	
+   height: 55px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);
+}
+nav ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;  
+}
+nav li{
+    float: left;
+    box-sizing: border-box;
+}
+nav li:first-child{
+    float: right;
+}
+nav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 16px 50px;
+    text-decoration: none;
+}
+nav li a:hover{
+    background-color: white;
+    border-radius: 25px;
+    color:crimson;
+}  
+  /* sign up style */
+form{
+    width: 40%;
+    margin: 100px auto 0;
+    padding: 30px;
+    box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);
+    border-radius: 10px;
+    background: white;
+}
+
+input[type=text], input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #4f30677d;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+input[type=text]:focus, input[type=password]:focus {
+    border: none;
+}
+label{
+    display: block;
+    margin: 20px 0 5px;
+}
+.error{
+    color: #da0404;
+    margin: 10px 2px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+button{
+    margin-top: 30px;
+    border-radius: 5px;
+    background: #eef1f5;
+    border:0;
+    font-weight: 700;
+    font-size: 0.8em;
+    display: block;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 2s;
+} 

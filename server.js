@@ -4,11 +4,14 @@ const server = require('http').createServer(app);
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const cookieParser = require('cookie-parser');
+
 app.use(cookieParser())
+app.use(express.static('public'));
+app.use(express.json());
 
 require('dotenv').config();
 
-app.use(express.json());
+app.set('view engine', 'ejs');
 
 const PORT = process.env.PORT || 5000;
 

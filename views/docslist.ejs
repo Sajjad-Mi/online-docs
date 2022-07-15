@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/style.css" rel="stylesheet" type="text/css" />
+        <title>Docs List</title>
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <%- include("./partials/nav.ejs") %>
+            <form id="create-doc">
+                <h2>create</h2>
+                <label for="title">Title</label>
+                <input type="text" name="title" required />
+                <button>create</button>
+            </form>  
+             
+
+    </body>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit',  (e) => {
+            e.preventDefault(); 
+            const title = form.title.value;
+            try {                                                              
+                fetch('/createDoc', { 
+                    method: 'POST', 
+                    body: JSON.stringify({ title }),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                .then(response=>{if(response.redirected==true) window.location.assign("/docslist")});    
+            }catch (err) {
+                console.log(err);
+                }
+            });
+    </script>
+    
+</html>

@@ -23,7 +23,9 @@ form.addEventListener('submit', async (e) => {
       body: JSON.stringify({ username, email, password, name, lastname })
     });
     const data = await res.json();
-
+    if (data.user) {
+      location.assign('/docslist');
+    }
 
     if(JSON.stringify(data.error.passwordError).includes("password")){
       passwordError.textContent = JSON.stringify(data.error.passwordError);

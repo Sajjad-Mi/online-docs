@@ -16,10 +16,11 @@ form.addEventListener('submit', async (e) => {
             headers: {'Content-Type': 'application/json'}
         });
         const data = await res.json();
-
         if(data.error !== ""){
             inputError.textContent = JSON.stringify(data.error);
-        }
+        }else{
+            location.assign('/docslist');
+        } 
         
     }catch (err) {
         console.log(err);

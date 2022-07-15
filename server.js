@@ -4,6 +4,7 @@ const server = require('http').createServer(app);
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const docsRoutes = require('./routes/docs');
+const {checkAuthorization} = require('./middleware/auth.js')
 
 const cookieParser = require('cookie-parser');
 
@@ -23,4 +24,4 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true,  useUnifiedTopolog
 })
 
 app.use(authRoutes);
-app.use(docsRoutes);
+app.use(checkAuthorization, docsRoutes);

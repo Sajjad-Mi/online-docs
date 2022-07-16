@@ -15,7 +15,11 @@
                 <button>create</button>
             </form>  
              
-
+        <div class="docs">
+            <% docs.forEach(doc=>{ %>
+            <a href="doc/<%= doc._id %>"><h4><%= doc.title %></h4></a>
+            <% }) %>
+        </div> 
     </body>
     <script>
         const form = document.querySelector('form');

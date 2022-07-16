@@ -23,7 +23,9 @@ const userSchema = new mongoose.Schema({
     },
     lastname: {
         type: String
-    }
+    },
+    docsId: [{title:String, _id:mongoose.ObjectId}]
+
 });
 
 userSchema.pre('save', async function(next) {

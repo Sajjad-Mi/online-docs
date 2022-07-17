@@ -87,3 +87,37 @@ button{
     transition-property: background-color;
     transition-duration: 2s;
 } 
+#create-doc{
+    float: right;
+}
+.docs{
+    box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);
+    border-radius: 10px;
+    background: white;
+    margin-top: 100px;
+    float: left;
+    width: 50%; 
+}
+h4 a{
+    text-decoration: none;
+    color: #000080;
+}
+h4 a:hover{
+    color:crimson;
+}
+.row-blog{
+    margin-left: 20px;
+}
+.docs a{
+    display: block;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 6px solid crimson;
+    text-decoration: none;
+    font-size: 20px;
+    color:black;
+    width: 200px;
+}
+.docs a:hover{
+    color: crimson;
+}

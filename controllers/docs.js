@@ -17,3 +17,19 @@ module.exports.createDoc_post = async (req , res) =>{
     res.redirect('/docslist');
     
  }
+ module.exports.doc_get = async (req , res) =>{
+  //first check the requested document to see if user can access it
+   
+    let hasAccess = false;
+    const user = await User.findOne({_id: req.id}, {docsId: 1})
+    user.docsId.forEach(doc => {
+        if(doc._id == req.params.id){
+            hasAccess = true;
+        }
+    });
+    if(hasAccess == true ){  
+        const doc = await Docs.findOne({_id: req.params.id});
+        console.log(doc)  
+    }                                                           
+    
+}

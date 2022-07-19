@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/style.css" rel="stylesheet" type="text/css" />
+        <title><%= title %></title>
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+        <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/decoupled-document/ckeditor.js"></script>
+    </head>
+    <body>
+        <%- include("./partials/nav.ejs") %>
+        <div id="toolbar-container"></div>
+
+        <div class="document-editor">
+            <div class="document-editor__toolbar"></div>
+            <div class="document-editor__editable-container">
+                <div class="document-editor__editable">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+           
+        
+            <div class="users">
+                <h3>Users</h3>
+                <hr>
+                <div class="user-list">
+                    <% users.forEach(user=>{ %>
+                        <h4><%= user %></h4>
+                    
+                    <% }) %>
+                </div>
+            </div>
+          
+        </div>
+      
+        
+    </body>
+    
+</html>

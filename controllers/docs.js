@@ -29,7 +29,7 @@ module.exports.createDoc_post = async (req , res) =>{
     });
     if(hasAccess == true ){  
         const doc = await Docs.findOne({_id: req.params.id});
-        console.log(doc)  
+        res.render('doc', {title: doc.title, docid:req.params.id, username:req.username, docsContent:doc.body, users:doc.users});
     }                                                           
     
 }

@@ -32,12 +32,22 @@
                     <% }) %>
                 </div>
             </div>
+            <% if(isAdmin){ %>
+                <form class="addUser">
+                    <label for="newUser">add user</label>
+                    <input type="text" name="newUser" required />
+                    <button>add</button>
+                </form>
+            <% } %>
           
         </div>
         <script >const docId="<%= docid %>"; const username="<%= username %>";const docsContent="<%- docsContent %>"; const title="<%= title %>"; const users="<%= users %>";</script>
-
+       
         <script src="/js/editor.js"></script>
- 
+        <% if(isAdmin){ %>
+        <script src="/js/admin.js"></script>
+        <% } %>
+
     </body>
     
 </html>

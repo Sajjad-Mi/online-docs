@@ -30,7 +30,7 @@ module.exports.createDoc_post = async (req , res) =>{
     });
     if(hasAccess == true ){  
         const doc = await Docs.findOne({_id: req.params.id});
-        const isAdmin = doc.admins.includes(user.username);
+        const isAdmin = doc.admins.includes(req.username);
         res.render('doc', {title: doc.title, docid:req.params.id, username:req.username, docsContent:doc.body, users:doc.users, isAdmin});
     }                                                           
     
@@ -42,4 +42,24 @@ module.exports.save_patch = async (req , res) =>{
     }catch(e){
         res.status(500).json({ message: "save failed"});
     }    
+}
+
+//add a user only if the request is from admin
+module.exports.addUser_post = async (req , res) =>{
+    
+    const doc = await Docs.findOne({_id:req.body.docId});
+    
+    if(doc.admins.includes(req.username)){
+        const user = await User.findOne({'username':`${req.body.newUser}`});   
+        doc.users.push(user.username);
+        user.docsId.push({title:req.body.title, _id:req.body.docId});
+        doc.save();
+        user.save();
+        res.json({ massage: "user added" });
+    }else{
+        res.status(403).json({ message: "save failed"});
+
+    }
+        
+    
  }

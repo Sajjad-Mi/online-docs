@@ -33,3 +33,11 @@ module.exports.createDoc_post = async (req , res) =>{
     }                                                           
     
 }
+module.exports.save_patch = async (req , res) =>{  
+    try{
+        const doc = await Docs.findOneAndUpdate({_id:req.body.docId}, { body: req.body.docsContent });  
+        res.json({ massage: "saved" });
+    }catch(e){
+        res.status(500).json({ message: "save failed"});
+    }    
+ }

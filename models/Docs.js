@@ -7,7 +7,7 @@ const docsSchema = new mongoose.Schema({
     body: {
       type: String
     },
- 
+    admins: [String],
     users: [String]
   });
  

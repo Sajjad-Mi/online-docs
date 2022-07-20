@@ -12,6 +12,7 @@ module.exports.createDoc_post = async (req , res) =>{
     const doc = await Docs.create({title: req.body.title, body:'' });  
     doc.users.push(user.username);
     user.docsId.push({title:req.body.title, _id:doc._id});
+    doc.admins.push(user.username);
     user.save();
     doc.save();
     res.redirect('/docslist');
@@ -29,7 +30,8 @@ module.exports.createDoc_post = async (req , res) =>{
     });
     if(hasAccess == true ){  
         const doc = await Docs.findOne({_id: req.params.id});
-        res.render('doc', {title: doc.title, docid:req.params.id, username:req.username, docsContent:doc.body, users:doc.users});
+        const isAdmin = doc.admins.includes(user.username);
+        res.render('doc', {title: doc.title, docid:req.params.id, username:req.username, docsContent:doc.body, users:doc.users, isAdmin});
     }                                                           
     
 }

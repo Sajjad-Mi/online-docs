@@ -1,4 +1,5 @@
-const doc=document.querySelector('.document-editor__editable');
+const doc = document.querySelector('.document-editor__editable');
+const socket = io();
 
 DecoupledEditor
     .create( document.querySelector( '.document-editor__editable' ), {initialData: docsContent } )

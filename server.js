@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const mongoose = require('mongoose');
+const io = require('socket.io')(server);
 const authRoutes = require('./routes/auth');
 const docsRoutes = require('./routes/docs');
+const jwt = require('jsonwebtoken');
 const {checkAuthorization} = require('./middleware/auth.js')
 
 const cookieParser = require('cookie-parser');
@@ -11,6 +13,16 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser())
 app.use(express.static('public'));
 app.use(express.json());
+
+const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
+io.use(wrap(cookieParser()));
+
+io.use((socket, next)=>{   
+  const cookieJWT = socket.request.cookies.jwt;
+  jwt.verify(cookieJWT, process.env.JWT_SECRET, async (err, decode)=>{
+     next();                                                       
+  })    
+})
 
 require('dotenv').config();
 
@@ -25,3 +37,7 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true,  useUnifiedTopolog
 
 app.use(authRoutes);
 app.use(checkAuthorization, docsRoutes);
+
+io.on('connection', socket => {
+  console.log('connected')
+})

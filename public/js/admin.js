@@ -1,3 +1,21 @@
+//remove a user
+const removeUser = (elm)=>{
+    fetch('/removeUser', {
+        method: 'DELETE',
+        body: JSON.stringify({ user:elm.innerText, docId:docId}),
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => {
+        if(response.status == 200){
+            elm.style.display='none';
+            console.log(elm.nextSibling)
+            elm.nextSibling.style.display='none';
+          
+        }
+    })
+    .catch(err => console.log(err));
+}
+
 //add new user to document
 const form = document.querySelector('.addUser');
 form.addEventListener('submit', async (e) => {

@@ -60,6 +60,25 @@ module.exports.addUser_post = async (req , res) =>{
         res.status(403).json({ message: "save failed"});
 
     }
-        
-    
+         
  }
+
+ //remove a user only if the request is from admin
+ module.exports.removeUser_delete = async (req, res)=>{
+    try{
+     
+        const doc = await Docs.findOne({_id: req.body.docId}, {admins: 1, users: 1});
+        if(doc.admins.includes(req.username)){
+            doc.users=doc.users.filter(user => user != req.body.user);
+            doc.save();
+            //remove document id from user documents list 
+            const user = await User.findOne({"username": `${req.body.user}`});
+            user.docsId = user.docsId.filter(doc => doc._id != req.body.docId);
+            user.save();
+            res.status(200).json({ massage: "user removed" });
+        }
+    }catch(e){
+        res.status(403).json({ message: "you don't have access"});
+    }
+      
+}

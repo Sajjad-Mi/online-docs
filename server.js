@@ -39,14 +39,16 @@ app.use(authRoutes);
 app.use(checkAuthorization, docsRoutes);
 
 io.on('connection', socket => {
-  socket.on('joinRoom',async ({username, roomId})=>{
+  socket.on('joinRoom', ({username, roomId})=>{
     //for every separate document create a room with document id for communication
     socket.join(roomId);
     socket.data.username = username;
     
-    socket.on('typed', data=>{
-      socket.broadcast.to(roomId).emit('newMessage', data)
-    })
+    
   })
+  socket.on('typed', ({data, roomId})=>{
+    socket.broadcast.to(roomId).emit('newMessage', data)
+  })
+
   
 })

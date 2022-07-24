@@ -1,15 +1,15 @@
 //remove a user
 const removeUser = (elm)=>{
+    const user = elm.innerText;
     fetch('/removeUser', {
         method: 'DELETE',
-        body: JSON.stringify({ user:elm.innerText, docId:docId}),
+        body: JSON.stringify({ user, docId:docId}),
         headers: {'Content-Type': 'application/json'}
     })
     .then(response => {
         if(response.status == 200){
             elm.style.display='none';
-            console.log(elm.nextSibling)
-            elm.nextSibling.style.display='none';
+            elm.nextSibling.nextSibling.style.display='none';            
           
         }
     })
@@ -33,8 +33,12 @@ form.addEventListener('submit', async (e) => {
             const h4 = document.createElement('h4');
             const h5 = document.createElement('h5');
             h4.innerText = newUser;
-           
+            h5.classList.add('user-rm');
+            h5.addEventListener('click', function (e) { removeUser(this.previousSibling)})
+            h5.innerText = 'remove user';  
             list.appendChild(h4);
+            list.appendChild(h5);
+
         });   
     } 
     catch (err) {

@@ -10,7 +10,7 @@ DecoupledEditor
         toolbarContainer.appendChild( editor.ui.view.toolbar.element );
 
         doc.addEventListener('keyup', ()=>{ 
-            socket.emit('typed', editor.getData());
+            socket.emit('typed', {data: editor.getData(), roomId: docId});
         })
         socket.on('newMessage', data=>{
             editor.setData(data);

@@ -125,10 +125,25 @@ h4 a:hover{
     width: 20%;
     float: right;
 }
-.users{
+.users, .addUser{
     width: 100%; 
     margin-top: 20px;
     float: right;
+    padding: 30px;
+    box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);
+    border-radius: 10px;
+    background: white;
+}
+.user-rm{
+    cursor:pointer;
+    border-radius: 5%;
+    background-color: #e0e3e6;
+    text-align: center;
+}
+.option{
+    width: 100%; 
+    float: right;
+    margin-top: 20px;
     padding: 30px;
     box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);
     border-radius: 10px;

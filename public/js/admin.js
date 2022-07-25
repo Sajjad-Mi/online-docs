@@ -45,3 +45,21 @@ form.addEventListener('submit', async (e) => {
         console.log(err);
     }
 });
+
+//delete a document
+const inputError = document.querySelector('.input.error');
+const trashcan = document.querySelector('a.delete');
+trashcan.addEventListener('click', async (e) => {    
+    const endpoint = `/deleteDoc/${trashcan.dataset.doc}`;
+
+    const res = await fetch(endpoint, {
+      method: 'DELETE',
+    });
+    const data = await res.json();
+    if(data.error !== ""){
+        inputError.textContent = JSON.stringify(data.error);
+    }else{
+        window.location.href = data.redirect;
+    }
+    
+});

@@ -41,7 +41,12 @@
                     <input type="text" name="newUser" required />
                     <button>add</button>
                 </form>
+                <div class='option'>
+                    <a class="delete" data-doc="<%= docid %>"><img src="/trashcan.svg"></a>
+                    <div class="input error"></div>
+                </div>     
             <% } %>
+          
           
         </div>
         <script >const docId="<%= docid %>"; const username="<%= username %>";const docsContent="<%- docsContent %>"; const title="<%= title %>"; const users="<%= users %>";</script>

@@ -82,3 +82,23 @@ module.exports.addUser_post = async (req , res) =>{
     }
       
 }
+
+module.exports.deleteDoc_delete = async (req, res)=>{
+    try{
+        const doc = await Docs.findOne({_id: req.params.id}, {admins: 1, users: 1});
+        if(doc.users.length == 1 && req.username === doc.admins[0]){
+            const user = await User.findById(req.id);
+            user.docsId = user.docsId.filter(docId => docId._id != req.params.id);
+            user.save();
+            await Docs.findOneAndDelete({ _id: req.params.id });
+            res.redirect('/docslist')
+        }else{
+            res.status(400).json({ error: "For deleting a document you have to remove other users" });
+        }
+        
+    }catch(e){
+        res.status(403).json({ message: "you don't have access"});
+       
+    }
+      
+}

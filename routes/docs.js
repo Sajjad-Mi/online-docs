@@ -9,6 +9,7 @@ router.get("/doc/:id", docsControllers.doc_get);
 router.patch("/save", docsControllers.save_patch);
 router.post("/addUser", docsControllers.addUser_post);
 router.delete("/removeUser", docsControllers.removeUser_delete);
+router.delete("/deleteDoc/:id", docsControllers.deleteDoc_delete);
 
 
 module.exports = router;

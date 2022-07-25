@@ -2,10 +2,14 @@
     <nav>
       
         <ul class="left">
-          
-            <li ><a href="/signup">Sign Up</a></li>
-            <li ><a href="/login">Log In</a></li>
-            
+            <% if(username !== null){ %>
+                <li><a href="/docsList">Docs</a></li>
+                <li><a href="/logout">Log Out</a></li>
+                <li style="display: inline-block; padding: 16px 50px;text-align: center;"><%= username %></li>  
+            <% }else{ %>
+                <li ><a href="/signup">Sign Up</a></li>
+                <li ><a href="/login">Log In</a></li>
+            <% } %>
         </ul>
       
     </nav>

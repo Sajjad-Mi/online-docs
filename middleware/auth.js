@@ -18,5 +18,22 @@ const checkAuthorization = (req, res , next)=>{
         res.redirect("/login");
     }
 }
-
-module.exports = {checkAuthorization}
+//check the cookie and send the user username for nav
+const checkUser = (req, res, next) => {     
+    const token = req.cookies.jwt;                                   
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+        if (err) {
+          res.locals.username = null;
+          next();
+        } else {
+          res.locals.username = decodedToken.username;
+          next();
+        }
+      });
+    } else {
+      res.locals.username = null;
+      next();
+    }
+  };
+module.exports = {checkAuthorization, checkUser}

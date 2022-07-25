@@ -6,7 +6,7 @@ const io = require('socket.io')(server);
 const authRoutes = require('./routes/auth');
 const docsRoutes = require('./routes/docs');
 const jwt = require('jsonwebtoken');
-const {checkAuthorization} = require('./middleware/auth.js')
+const {checkAuthorization, checkUser} = require('./middleware/auth.js')
 
 const cookieParser = require('cookie-parser');
 
@@ -35,6 +35,7 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true,  useUnifiedTopolog
   server.listen(PORT);
 })
 
+app.use('*', checkUser)
 app.use(authRoutes);
 app.use(checkAuthorization, docsRoutes);
 

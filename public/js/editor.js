@@ -2,7 +2,20 @@ const doc = document.querySelector('.document-editor__editable');
 const socket = io();
 
 socket.emit('joinRoom', {username, roomId:docId});
+socket.emit('onUsers', {roomId:docId});
 
+socket.on('onUsers', (onUsers) =>{
+    let list = document.querySelector('.onUsers-list');
+    while (list.hasChildNodes()) {  
+        list.removeChild(list.firstChild);
+    }
+    onUsers.forEach(user => {
+        const h4 = document.createElement('h4');
+        h4.classList.add('user');
+        h4.innerText = user;   
+        list.appendChild(h4);
+    })
+})
 DecoupledEditor
     .create( document.querySelector( '.document-editor__editable' ), {initialData: docsContent } )
     .then( editor => {

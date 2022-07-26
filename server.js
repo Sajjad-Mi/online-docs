@@ -39,14 +39,36 @@ app.use('*', checkUser)
 app.use(authRoutes);
 app.use(checkAuthorization, docsRoutes);
 
+
+const getOnUsers = async (roomId) => {
+  const sockets = await io.in(roomId).fetchSockets();
+  let onUsers = []; 
+  sockets.forEach(socket => {
+    onUsers.push(socket.data.username);
+  })
+  return onUsers;
+}
 io.on('connection', socket => {
   socket.on('joinRoom', ({username, roomId})=>{
     //for every separate document create a room with document id for communication
     socket.join(roomId);
     socket.data.username = username;
-    
-    
+    socket.data.roomId = roomId;
+
   })
+  socket.on('onUsers', async ({roomId}) =>{ 
+    
+    const onUsers = await getOnUsers(roomId);
+    io.to(roomId).emit('onUsers', onUsers);
+  })
+
+   //if a user disconnected update the online users
+   socket.on('disconnect', async (reason)=>{
+    const roomId = socket.data.roomId;
+    const onUsers = await getOnUsers(roomId);
+    io.to(roomId).emit('onUsers', onUsers);
+  })
+
   socket.on('typed', ({data, roomId})=>{
     socket.broadcast.to(roomId).emit('newMessage', data)
   })

@@ -203,3 +203,31 @@ h4 a:hover{
     box-shadow: 0 0 5px hsla( 0,0%,0%,.1 );
     margin: 0 auto;
 }
+
+@media screen and (max-width: 800px) {
+    nav{
+        height: 155px;
+    }
+    ul li{
+        width: 100%;
+        display: block;
+    }
+}
+@media screen and (max-width: 925px) {
+    #create-doc{
+        float: none;
+    }
+    .docs{
+        float: none;
+        margin: 100px auto;
+    }
+    .document-editor{
+       width: 100%;
+    }
+    .details{
+        float: none;
+        margin:20px auto ;
+        width: 50%;
+    }
+}
+  

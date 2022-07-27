@@ -125,7 +125,7 @@ h4 a:hover{
     width: 20%;
     float: right;
 }
-.users, .addUser{
+.users, .addUser, .onUsers{
     width: 100%; 
     margin-top: 20px;
     float: right;
@@ -133,6 +133,14 @@ h4 a:hover{
     box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);
     border-radius: 10px;
     background: white;
+}
+.onUsers{
+    margin-top: 100px;
+}
+.delete{
+    cursor:pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.2), 0 6px 20px 0 rgba(151, 150, 150, 0.19);         
 }
 .user-rm{
     cursor:pointer;

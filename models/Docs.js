@@ -8,7 +8,10 @@ const docsSchema = new mongoose.Schema({
       type: String
     },
     admins: [String],
-    users: [String]
+    users: [String],
+    docDate:{
+      type: Date
+    }
   });
  
   const Docs = mongoose.model('docs', docsSchema);

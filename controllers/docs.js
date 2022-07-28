@@ -7,9 +7,9 @@ module.exports.docsList_get = async (req , res) =>{
     res.render('docslist', {docs: userDocs.docsId});                                                    
 }
 module.exports.createDoc_post = async (req , res) =>{
-  
+    const date = new Date();
     const user = await User.findOne({_id: req.id}, {username: 1, docsId: 1});
-    const doc = await Docs.create({title: req.body.title, body:'' });  
+    const doc = await Docs.create({title: req.body.title, body:'', docDate:date});  
     doc.users.push(user.username);
     user.docsId.push({title:req.body.title, _id:doc._id});
     doc.admins.push(user.username);
@@ -31,7 +31,15 @@ module.exports.createDoc_post = async (req , res) =>{
     if(hasAccess == true ){  
         const doc = await Docs.findOne({_id: req.params.id});
         const isAdmin = doc.admins.includes(req.username);
-        res.render('doc', {title: doc.title, docid:req.params.id, username:req.username, docsContent:doc.body, users:doc.users, isAdmin});
+        res.render('doc', {
+            title: doc.title, 
+            docid:req.params.id, 
+            username:req.username, 
+            docsContent:doc.body, 
+            users:doc.users, 
+            date: doc.docDate,
+            isAdmin
+        });
     }                                                           
     
 }

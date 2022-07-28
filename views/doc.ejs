@@ -42,20 +42,24 @@
             </div>
             <% if(isAdmin){ %>
                 <form class="addUser">
-                    <label for="newUser">add user</label>
+                    <label for="newUser">Add user</label>
                     <input type="text" name="newUser" required />
                     <button>add</button>
                 </form>
                 <div class='option'>
                     <a class="delete" data-doc="<%= docid %>"><img src="/trashcan.svg"></a>
                     <div class="input error"></div>
+                    <h4 id="date"></h4>
                 </div>     
             <% } %>
           
           
         </div>
-        <script >const docId="<%= docid %>"; const username="<%= username %>";const docsContent="<%- docsContent %>"; const title="<%= title %>"; const users="<%= users %>";</script>
-       
+        <script >const docId="<%= docid %>"; const username="<%= username %>";const docsContent="<%- docsContent %>"; const title="<%= title %>"; const users="<%= users %>"; const docDate="<%= date %>";</script>
+        <script>
+            const date = new Date(docDate).toLocaleString()
+            document.getElementById("date").innerText = date;
+        </script>
         <script src="/js/editor.js"></script>
         <% if(isAdmin){ %>
         <script src="/js/admin.js"></script>

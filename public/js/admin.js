@@ -1,6 +1,6 @@
 //remove a user
-const removeUser = (elm)=>{
-    const user = elm.innerText;
+const removeUser = (userElm, elm)=>{
+    const user = userElm.innerText;
     fetch('/removeUser', {
         method: 'DELETE',
         body: JSON.stringify({ user, docId:docId}),
@@ -8,8 +8,8 @@ const removeUser = (elm)=>{
     })
     .then(response => {
         if(response.status == 200){
-            elm.style.display='none';
-            elm.nextSibling.nextSibling.style.display='none';            
+            userElm.style.display='none';
+            elm.style.display='none';            
           
         }
     })
@@ -34,7 +34,7 @@ form.addEventListener('submit', async (e) => {
             const h5 = document.createElement('h5');
             h4.innerText = newUser;
             h5.classList.add('user-rm');
-            h5.addEventListener('click', function (e) { removeUser(this.previousSibling)})
+            h5.addEventListener('click', function (e) { removeUser(this.previousSibling, this)})
             h5.innerText = 'remove user';  
             list.appendChild(h4);
             list.appendChild(h5);

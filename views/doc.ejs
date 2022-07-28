@@ -35,7 +35,7 @@
                     <% users.forEach(user=>{ %>
                         <h4><%= user %></h4>
                         <% if(isAdmin == true && user != username){ %>
-                            <h5 class="user-rm" onclick="removeUser(this.previousSibling.previousSibling)">remove user</h5>
+                            <h5 class="user-rm" onclick="removeUser(this.previousSibling.previousSibling, this)">remove user</h5>
                         <% } %>
                     <% }) %>
                 </div>

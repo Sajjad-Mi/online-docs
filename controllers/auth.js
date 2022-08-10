@@ -17,9 +17,9 @@ const checkEmailError = (error)=>{
     }
     return errorMessage;
 }
-const checkUsernameErr = (err)=>{
+const checkUsernameErr = (error)=>{
     let errorMessage = "";
-    if(error.message.includes("username") &&err.code === 11000){
+    if(error.message.includes("username") && error.code === 11000){
         errorMessage = "This username is already exists";
     }
     return errorMessage;
